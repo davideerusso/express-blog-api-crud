@@ -51,7 +51,23 @@ const store = (req, res) => {
 };
 
 const update = (req, res) => {
-  res.json("Sostituzione dei post");
+  const idPost = parseInt(req.params.id);
+  const { title, content, image, tags } = req.body;
+
+  const post = posts.find((currentPost) => currentPost.id === idPost);
+  if (!post) {
+    res.status(404).json({
+      succes: "OK",
+      status: "404",
+      message: "Post Not Found",
+    });
+    return;
+  }
+
+  const updatePost = { id: idPost, title, content, image, tags };
+  const postIndex = posts.indexOf(post);
+  posts.splice(postIndex, 1, updatePost);
+  res.json(posts);
 };
 
 const destroy = (req, res) => {
