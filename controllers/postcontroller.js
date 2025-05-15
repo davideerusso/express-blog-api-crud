@@ -16,7 +16,7 @@ const index = (req, res) => {
   }
 
   res.json({
-    data: filterdPost,
+    data: posts,
     status: "I miei post",
   });
 };
@@ -36,7 +36,18 @@ const show = (req, res) => {
 };
 
 const store = (req, res) => {
-  res.json("Creazione dei post");
+  const { title, content, image, tags, id } = req.body;
+
+  let maxId = 0;
+  for (post of posts) {
+    if (post.id > maxId) maxId = post.id;
+  }
+  const postId = maxId + 1;
+  const newPost = { id: postId, title, content, image, tags };
+  posts.push(newPost);
+
+  res.json(newPost);
+  res.status(201);
 };
 
 const update = (req, res) => {

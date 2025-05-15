@@ -6,6 +6,8 @@ const postRouter = require("./routers/posts");
 
 const { posts } = require("./data/db");
 
+app.use(express.json());
+
 app.use("/posts", postRouter);
 
 app.use(express.static("public"));
