@@ -67,7 +67,7 @@ const update = (req, res) => {
   const updatePost = { id: idPost, title, content, image, tags };
   const postIndex = posts.indexOf(post);
   posts.splice(postIndex, 1, updatePost);
-  res.json(posts);
+  res.json(updatePost);
 };
 
 const destroy = (req, res) => {
